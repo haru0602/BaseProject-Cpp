@@ -2,10 +2,12 @@
 #include "main.h"
 
 #ifndef TEST
+int bitch(int,int,int);
 int main() {
     printf("Rule Breaker!!!\n");
     printf("5 + 2 = %d\n", addNumber(5, 2));
     printf("%d\n", getTriangleType(3, 4, 5));
+    printf("Bitch is %d",bitch(3,4,5));
     return 0;
 }
 #endif // TEST
@@ -13,7 +15,11 @@ int main() {
 int addNumber(int a, int b) {
     return a + b;
 }
-
+int bitch(int a,int b,int c)
+{
+    b=a+c;
+    return b;
+}
 int getTriangleType(int a, int b, int c) {
     if (a > b && a > c) {
         int temp = c; c = a; a = temp;
