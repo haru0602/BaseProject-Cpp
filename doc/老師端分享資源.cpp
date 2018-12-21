@@ -1,15 +1,15 @@
 #include<stdio.h>
-
+#include<stdlib.h>
 int main(){
     FILE *fp;
     char a[500];
     int i,b;
-    printf("╫п©О╬э:1 ©И╓J╨Т╖} 2 ©И╓J╝ядy╕W╨ы 3 ╜╚╥s╪g╜n╓ю╗и╙╨╨Т╞╦ 4 ╜╚╥s╪g╜n╓ю╗и╙╨╝ядy╕W╨ы:");
+    printf("Х╚▀И│╦Ф⌠┤:1 Х╪╦Е┘╔Г╤╡Е²─ 2 Х╪╦Е┘╔Ф⌡╦Г╠█Е░█Г╗╠ 3 И┤█Ф√╟Е╞╚Х╕│Е┬├Д╨╚Г └Г╤╡Г╚≥ 4 И┤█Ф√╟Е╞╚Х╕│Е┬├Д╨╚Г └Ф⌡╦Г╠█Е░█Г╗╠:");
     scanf("%d",&i);
     switch(i){
         case 1:
         scanf("%s",a);
-        printf("╫п╚Ж1 юx╕s 2 ╗З╝Ь:");
+        printf("Х╚▀Ф▄┴1 Е└╡Е╜≤ 2 Е▐√Ф╤┬:");
         scanf("%d",&b);
         if(b==1){
         fp=fopen("website.txt","a+");
@@ -18,12 +18,12 @@ int main(){
         break;
         }
         else if(b==2){
-            printf("╔H╗З╝Ь");
+            printf("Д╩╔Е▐√Ф╤┬");
             break;
         }
         case 2:
             scanf("%s",a);
-            printf("╫п╚Ж1 юx╕s 2 ╗З╝Ь:");
+            printf("Х╚▀Ф▄┴1 Е└╡Е╜≤ 2 Е▐√Ф╤┬:");
             scanf("%d",&b);
             if(b==1){
             fp=fopen("book.txt","a+");
@@ -32,12 +32,12 @@ int main(){
             break;
         }
         else if(b==2){
-            printf("╔H╗З╝Ь");
+            printf("Д╩╔Е▐√Ф╤┬");
             break;
         }
         case 3:
             scanf("%s",a);
-            printf("╫п╚Ж1 юx╕s 2 ╗З╝Ь:");
+            printf("Х╚▀Ф▄┴1 Е└╡Е╜≤ 2 Е▐√Ф╤┬:");
             scanf("%d",&b);
             if(b==1){
             fp=fopen("website.txt","w+");
@@ -46,12 +46,12 @@ int main(){
             break;
             }
             else if(b==2){
-                printf("╔H╗З╝Ь");
+                printf("Д╩╔Е▐√Ф╤┬");
             break;
             }
         case 4:
            scanf("%s",a);
-            printf("╫п╚Ж1 юx╕s 2 ╗З╝Ь:");
+            printf("Х╚▀Ф▄┴1 Е└╡Е╜≤ 2 Е▐√Ф╤┬:");
             scanf("%d",&b);
             if(b==1){
             fp=fopen("book.txt","w+");
@@ -60,7 +60,7 @@ int main(){
             break;
             }
             else if(b==2){
-                printf("╔H╗З╝Ь");
+                printf("Д╩╔Е▐√Ф╤┬");
             break;
             }
     }

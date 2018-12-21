@@ -5,12 +5,12 @@ int main(){
     FILE *pf;
     char ch;
     int a;
-    printf("½Ğ¿ï¾Ü¥\¯à: 1 ¶}±Òwebsite¤À¨É¤º®e 2 ¶}±Òbook¤À¨É¤º®e:");
+    printf("è«‹é¸æ“‡åŠŸèƒ½: 1 é–‹å•Ÿwebsiteåˆ†äº«å…§å®¹ 2 é–‹å•Ÿbookåˆ†äº«å…§å®¹:");
     scanf("%d",&a);
     if(a==1){
     if((pf=fopen("website.txt","r"))==NULL)
     {
-        printf("¤£¯à¶}±Ò¦¹¤å¥ó!\n");
+        printf("ä¸èƒ½é–‹å•Ÿæ­¤æ–‡ä»¶!\n");
         exit(0);
     }
     ch=fgetc(pf);
@@ -24,7 +24,7 @@ int main(){
     else if(a==2){
        if((pf=fopen("book.txt","r"))==NULL)
     {
-        printf("¤£¯à¶}±Ò¦¹¤å¥ó!\n");
+        printf("ä¸èƒ½é–‹å•Ÿæ­¤æ–‡ä»¶!\n");
         exit(0);
     }
     ch=fgetc(pf);
