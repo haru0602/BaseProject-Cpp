@@ -35,11 +35,11 @@ int main(){
 	
 	printf("請輸入答案:");
 	
-	fprintf(fp,"回答:");
+	fprintf(fp2,"回答:");
 	for(i=0;;i++){
 		scanf("%c",&answer[i]);
 		
-		fprintf(fp,"%c",answer[i]);
+		fprintf(fp2,"%c",answer[i]);
 		if(answer[i]=='\n'){
 			printf("回答成功\");
 			break;
