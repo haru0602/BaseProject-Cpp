@@ -357,6 +357,7 @@ void mainBoard(){
             case 2:
                 //進入資源分享
                 system("CLS");
+                setColor(YELLOW,BLACK);
                 if(user.permission == TEACHER)
                     teacherShare();
                 else{
@@ -366,16 +367,19 @@ void mainBoard(){
                 break;
             case 3:
                 system("CLS");
+                setColor(RED,BLACK);
                 grouping();
                 //進入分組功能
                 break;
             case 4:
                 system("CLS");
+                setColor(RED,BLACK);
                 studentCalendar();
                 //進入行事曆
                 break;
             case 5:
                 system("CLS");
+                setColor(GREEN,BLACK);
                 if(user.permission == TEACHER)
                     //teacherRemind();
                     printf("教師版提醒功\能\n");
@@ -385,6 +389,7 @@ void mainBoard(){
                 break;
             case 6:
                 system("CLS");
+                setColor(DARK_WHITE,BLACK);
                 if(user.permission == TEACHER){
                     //進入老師專用功能
                     teacherAnswer();
