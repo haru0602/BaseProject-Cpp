@@ -329,18 +329,19 @@ void regisiter(){
 //功能主介面
 void mainBoard(){
     SetConsoleTitle("MainBoard");
-    bool inputCorrect = true;
-    int choose;
+    bool inputCorrect = true, exit = false;
+    char choose;
     setColor(CYAN,BLACK);
     do{
         system("CLS");
         cout<<"Hello, "<<user.name;
         if(user.permission == TEACHER)
-            printf("Teacher\n");
+            printf(" ,Teacher\n");
         else
-            printf("Studnet\n");
+            printf(" ,Studnet\n");
 
         printf("Function List\n");
+        printf("0: Exit\n");
         printf("1: Message Board\n");
         printf("2: Sharing Information\n");
         printf("3: Grouping\n");
@@ -351,9 +352,13 @@ void mainBoard(){
 
         printf("Input your choice:");
         cin>>choose;
+        choose -= '0';
         inputCorrect = true;
 
         switch(choose){
+            case 0:
+                exit = true;
+                break;
             case 1:
                 commentMainBoard();
                 break;
@@ -406,32 +411,36 @@ void mainBoard(){
 
 
         }
-    }while(!inputCorrect);
+    }while(!inputCorrect && !exit);
 }
 
 //留言版功能選擇主介面
 void commentMainBoard(){
     SetConsoleTitle("CommentBoard");
-    int choose;
+    char choose;
     bool chooseCorrect;
     do{
         system("CLS");
         if(user.sensitiveWordCount>TALK)
             printf("You are banned!!\n");
-        printf("1: Questioning Board During Class（Anonymous）\n");
+
+        printf("1: Questioning Board During Class(Anonymous)\n");
         printf("2: Questioning Board\n");
+        printf("3: Exit\n");
         printf("Input your choice:");
         cin>>choose;
+        choose -= '0';
         chooseCorrect = true;
 
         switch(choose){
+
             case 1:
-                commentBooard("QuestioningBoardDuringClass（Anonymous）");
+                commentBooard("QuestioningBoardDuringClass(Anonymous)");
                 break;
             case 2:
                 commentBooard("QuestioningBoard");
                 break;
-            case KEY_UP:
+            case 3:
                 mainBoard();
                 break;
             default:
@@ -462,17 +471,19 @@ string extractPath(){
 //留言版功能選擇介面
 void commentBooard(string boardName){
     SetConsoleTitle(boardName.c_str());
-    int choose;
+    char choose;
     bool chooseCorrect;
     do{
         system("CLS");
         chooseCorrect = true;
         if(user.sensitiveWordCount>TALK)
             printf("You are banned\n");
-        printf("1: See all the conversation\n");
+        printf("1: Browse all the conversation\n");
         printf("2: Starting new conversation\n");
+        printf("3: Exit\n");
         printf("Input your choice:");
         cin>>choose;
+        choose -= '0';
         switch(choose){
             case 1:
                 //瀏覽帖子列表
@@ -482,12 +493,12 @@ void commentBooard(string boardName){
             case 2:
                 //開新帖子
                 chooseCorrect = false;
-                if(boardName == "QuestioningBoardDuringClass（Anonymous）")
+                if(boardName == "QuestioningBoardDuringClass(Anonymous)")
                     createPost(boardName, true);
                 else
                     createPost(boardName, false);
                 break;
-            case KEY_UP:
+            case 3:
                 commentMainBoard();
                 break;
             default:
@@ -526,7 +537,7 @@ void browsePostList(string boardName){
                 cout<<postNum+1 <<": " << postName[postNum]<<endl;
                 printf("---------------------------------------\n");
             }
-            printf("%-20s%-20s%-20s\n", cur==0? "":"Previous Page : Left Bottom ", "Returning to Main Board : Up Bottom ", file.eof()==true? "":"Next Page : Right Bottom ");
+            printf("%-20s%-20s%-20s\n", cur==0? "":"Previous Page : Left Bottom ", " --Returning to Main Board : Up Bottom ", file.eof()==true? "":" --Next Page : Right Bottom ");
             char charChoose;
             charChoose = _getch();
             int intChoose = charChoose - '0';
@@ -571,7 +582,8 @@ void browsePost(string boardName,string postName){
     ifstream file(filePath.c_str(), ios::in);
     string comment, commenter;
     bool chooseCorrect;
-    int cur=0, choose;
+    int cur=0;
+    char choose;
     SetConsoleTitle(postName.c_str());
     if(file.is_open()){
         do
@@ -607,7 +619,7 @@ void browsePost(string boardName,string postName){
                 cout<<commenter<<endl;
                 printf("---------------------------------------\n");
             }
-            printf("%-20s%-20s%-20s%-20s\n", cur==0? "":"Previous Page : Left Bottom", "Returning to Main Board : Up Bottom", "Leave a comment : Down Bottom", file.eof()==true? "":"Next Page : Right Bottom");
+            printf("%-20s%-20s%-20s%-20s\n", cur==0? "":"Previous Page : Left Bottom ", " --Returning to Main Board : Up Bottom", " --Leave a comment : Down Bottom", file.eof()==true? "":"Next Page : Right Bottom");
             _getch();
             switch((choose = _getch()))
             {
@@ -619,7 +631,7 @@ void browsePost(string boardName,string postName){
                 if(user.sensitiveWordCount <= TALK)
                 {
                     //留言
-                    if(boardName == "QuestioningBoardDuringClass（Anonymous）")
+                    if(boardName == "QuestioningBoardDuringClass(Anonymous)")
                         commentFun(filePath,true);
                     else
                         commentFun(filePath, false);
