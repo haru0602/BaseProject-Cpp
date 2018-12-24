@@ -1,10 +1,11 @@
 //<<<<<<< Updated upstream:doc/專題資料夾/老師端分享資源.cpp
 #include<stdio.h>
 #include<stdlib.h>
+
 void teacherShare();
-int main(){
+/*int main(){
     teacherShare();
-}
+}*/
 void teacherShare(){
     FILE *fp;
     char a[500];
