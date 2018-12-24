@@ -38,7 +38,7 @@ int studentCalendar(){
     char t;
     while (1)
     {
-        printf("Select One(1. Print the Calendar 2. Set Even 3. Exit):");
+        printf("Select One(1. Print the Calendar 2. Set Event 3. Exit):");
         scanf("%d",&select);
         switch (select)
         {
@@ -122,7 +122,7 @@ void printcalendar(int year, int month)
     int d = (daysofmonth(year, month) + 1) % 7;//判斷這個月的一號是星期幾
     int days = ndays[ month - 1 ];//一個月的總日數
     int i;
-    printf( "\n  Sun Mon Tue Wed Thu Fri Sat\n" );
+    printf( "\n  Su Mo Tu We Th Fr Sa\n" );
     if (leapyear(year) && month == 2)
         days = 29;
     for(i=0; i<d; i++)
