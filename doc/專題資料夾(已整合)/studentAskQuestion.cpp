@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<string.h>
-#include<stdlib.h>
-
+#include <stdlib.h>
 
 
 
@@ -35,13 +34,13 @@ void studentAskQuestion(){
 	FILE *fp=fopen("test.txt","a");
 
 
-	printf("要問什麼問題:");
-	fprintf(fp,"要問的問題:");
+	printf("What question do you want to ask:");
+	fprintf(fp,"What question do you want to ask:");
 	for(i=0;;i++){
 		scanf("%c",&question[i]);
 		fprintf(fp,"%c",question[i]);
 		if(question[i]=='\n'){
-			printf("提問成功\");
+			printf("Asking Complete\n");
 			break;
 		}
 		else if(i>1000){

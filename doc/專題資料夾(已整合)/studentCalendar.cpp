@@ -38,7 +38,7 @@ int studentCalendar(){
     char t;
     while (1)
     {
-        printf("請選功能(1.顯示行事曆2.設定事件3.結束):");
+        printf("Select One(1. Print the Calendar 2. Set Even 3. Exit):");
         scanf("%d",&select);
         switch (select)
         {
@@ -48,8 +48,8 @@ int studentCalendar(){
 
                 printf("Enter this month:");
                 scanf("%d", &month);
-                printf(" %d年", year);
-                printf("%d月", month);
+                printf("Year: %d", year);
+                printf("Month: %d", month);
                 if(year>9999 || year<1000 || month>12 || month<0)//如果年和月輸入錯就重新輸入
                 {
                     printf("\nvalidation error, \nredesignate year and month\n");
@@ -64,8 +64,8 @@ int studentCalendar(){
                 printf("Enter this month:");
                 scanf("%d", &month);
                 sprintf(mo,"%d",month);
-                printf(" %d年", year);
-                printf("%d月\n", month);
+                printf("Year: %d", year);
+                printf("Month: %d\n", month);
                 if(year>9999 || year<1000 || month>12 || month<0)
                 {
                     printf("validation error, \nredesignate year and month\n");
@@ -122,7 +122,7 @@ void printcalendar(int year, int month)
     int d = (daysofmonth(year, month) + 1) % 7;//判斷這個月的一號是星期幾
     int days = ndays[ month - 1 ];//一個月的總日數
     int i;
-    printf( "\n  日 一 二 三 四 五 六\n" );
+    printf( "\n  Sun Mon Tue Wed Thu Fri Sat\n" );
     if (leapyear(year) && month == 2)
         days = 29;
     for(i=0; i<d; i++)
@@ -135,12 +135,12 @@ void printcalendar(int year, int month)
             printf("\n");
     }
     printf( "\n" );
-    printf("這個月的事件\n");
+    printf("Event of the month\n");
     while (1)
     {
         if (thisYearEvent[month-1].year!=year)
         {
-            printf("目前沒有\n");
+            printf("N/A\n");
             break;
         }
         else
@@ -149,7 +149,7 @@ void printcalendar(int year, int month)
             {
                 if (thisYearEvent[month-1].thisdayEvent[j].flag == 1)//有事件就顯示
                 {
-                    printf("·%d日:\n%s\n",j,thisYearEvent[month-1].thisdayEvent[j].c);
+                    printf("Day: ·%d\n%s\n",j,thisYearEvent[month-1].thisdayEvent[j].c);
                 }
             }
             break;
@@ -168,12 +168,12 @@ void setEvent(int year,int month)
     thisYearEvent[month-1].year = year;//先設定幾年的事件
     while (1)
     {
-        printf("輸入設定幾號的事件:");
+        printf("Enter the number of the happening day:");
         scanf("%d",&n);//再輸入幾號的
 
         if (n<=0||n>daysofmonth(year, month))//輸入錯再重新
         {
-            printf("輸入錯誤格式，再重新輸入\n");
+            printf("Wrong format，Enter again\n");
         }
         else
         {
@@ -187,7 +187,7 @@ void setEvent(int year,int month)
             break;
         }
     }
-    printf("輸入事件:\n");
+    printf("Enter event:\n");
     scanf("%s",s);//輸入事件名稱
     strcpy(info,s);//把所有事件資料列在一起
     strcat(data,ye);

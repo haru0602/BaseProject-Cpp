@@ -36,15 +36,15 @@ char *question;
 
 
 
-	printf("請輸入答案:");
+	printf("Enter Answer:");
 
-	fprintf(fp2,"回答:");
+	fprintf(fp2,"Answer:");
 	for(i=0;;i++){
 		scanf("%c",&answer[i]);
 
 		fprintf(fp2,"%c",answer[i]);
 		if(answer[i]=='\n'){
-			printf("回答成功\");
+			printf("Answer Complete\n");
 			break;
 		}
 		else if(i>50){

@@ -8,7 +8,9 @@
 #include <unistd.h>
 #include<vector>
 #include<algorithm>
-
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 
 #include"teacherShare.cpp"
 #include"teacherAnswer.cpp"
@@ -27,7 +29,7 @@
 #define KEY_LEFT 75
 #define KEY_RIGHT 77
 #define KEY_DOWN 80
-//¸T¨¥¦¸¼Æ
+//ç¦è¨€æ¬¡æ•¸
 #define TALK 0
 
 using namespace std;
@@ -52,13 +54,13 @@ enum Color{
 };
 Color color;
 
-//¨­¥÷
+//èº«ä»½
 enum Id{
     STUDENT = 0,
     TEACHER = 1
 };
 
-//¨Ï¥ÎªÌ¸ê®Æµ²ºc
+//ä½¿ç”¨è€…è³‡æ–™çµæ§‹
 typedef struct {
     string account;
     string password;
@@ -90,7 +92,7 @@ void commentFun(string filePath, bool anonymous);
 bool haveSensitiveWord(string statment);
 void createPost(string boarName, bool anonymous);
 
-//¨Ï¥ÎªÌ¸ê®Æ, ¥i¥Î©ó¦U­Ó¥\¯à¤¤Åã¥Ü¨Ï¥ÎªÌ¸ê®Æ
+//ä½¿ç”¨è€…è³‡æ–™, å¯ç”¨æ–¼å„å€‹åŠŸèƒ½ä¸­é¡¯ç¤ºä½¿ç”¨è€…è³‡æ–™
 User user;
 //////
 
@@ -113,26 +115,26 @@ void goToxy(int x, int y ){
 
 
 
-//¶}©l¥D¤¶­±
+//é–‹å§‹ä¸»ä»‹é¢
 void loginBoard(){
-    SetConsoleTitle("µn¤J/µù¥U");
+    SetConsoleTitle("Login/Register");
     string ans, goToRegister;
     bool loginSuccess;
     printf("Welcome!!");
 
     do{
         system("CLS");
-        printf("µn¤J[Y\\N]:");
+        printf("Log[Y\\N]:");
         cin>>ans;
         loginSuccess = false;
-        //§PÂ_¿é¤Jªº¥¿½T©Ê
+        //åˆ¤æ–·è¼¸å…¥çš„æ­£ç¢ºæ€§
         if(ans == "Y" || ans == "y"){
             loginSuccess = login();
-            //¿ù»~¿é¤J¦¸¼Æ¶W¹L3¦¸«á¸ß°İ¬O§_­nµù¥U
+            //éŒ¯èª¤è¼¸å…¥æ¬¡æ•¸è¶…é3æ¬¡å¾Œè©¢å•æ˜¯å¦è¦è¨»å†Š
             if(!loginSuccess){
                 system("CLS");
-                printf("¿ù»~¿é¤J¦¸¼Æ¶W¹L3¦¸\n");
-                printf("¬O§_­n¶i¦æµù¥U[Y\\N]:");
+                printf("Error over three times\n");
+                printf("Registering?[Y\\N]:");
                 cin>>goToRegister;
                 if(goToRegister == "Y" || goToRegister == "y")
                     break;
@@ -143,7 +145,7 @@ void loginBoard(){
         }
 
         else if(ans != "N" && ans != "n"){
-            printf("¿é¤J¿ù»~\n");
+            printf("Input Error\n");
             system("pause");
             continue;
         }
@@ -152,17 +154,17 @@ void loginBoard(){
 
     while(!loginSuccess &&ans != "N" || ans != "n" && ans != "Y" && ans != "y"){
         system("CLS");
-        printf("µù¥U[Y\\N]:");
+        printf("Register[Y\\N]:");
         cin>>ans;
 
-        //§PÂ_¿é¤J¥¿½T©Ê
+        //åˆ¤æ–·è¼¸å…¥æ­£ç¢ºæ€§
         if(ans == "Y" || ans == "y"){
             regisiter();
             loginSuccess = login();
         }
 
         else if(ans != "N" && ans != "n"){
-            printf("¿é¤J¿ù»~\n");
+            printf("Input Error\n");
             system("pause");
             continue;
         }
@@ -173,27 +175,27 @@ void loginBoard(){
 
 }
 
-//µn¤J¤¶­±
+//ç™»å…¥ä»‹é¢
 bool login(){
-    SetConsoleTitle("µn¤J");
+    SetConsoleTitle("Login");
     ifstream file;
     User input;
     bool loginSuccess = false ;
     int wrongCount =0;
-    string filePath = extractPath() + "\\µn¤J\\UserName.txt";
+    string filePath = extractPath() + "\\Login\\UserName.txt";
     string userAccount;
     file.open(filePath.c_str(), ios::in);
     do{
         system("CLS");
         setColor(PURPLE,BLACK);
-        printf("±b¸¹:");
+        printf("Account:");
         cin>>input.account;
-        printf("±K½X:");
+        printf("Password:");
         cin>>input.password;
 
-        //§PÂ_±b¸¹±K½Xªº®æ¦¡
+        //åˆ¤æ–·å¸³è™Ÿå¯†ç¢¼çš„æ ¼å¼
         if(input.account.length() < 6 || input.password.length() < 6){
-            printf("±b¸¹©Î±K½X®æ¦¡¿ù»~\n");
+            printf("Account or Password is wrong format\n");
             system("pause");
             continue;
         }
@@ -201,12 +203,12 @@ bool login(){
         if(file.is_open()){
 
             while(!file.eof()){
-                //Åª¨úÀÉ®×¤º®e
+                //è®€å–æª”æ¡ˆå…§å®¹
                 file>>userAccount;
 
-                //§PÂ_µn¤Jªº±b¸¹¤Î±K½X¬O§_¥¿½T
+                //åˆ¤æ–·ç™»å…¥çš„å¸³è™ŸåŠå¯†ç¢¼æ˜¯å¦æ­£ç¢º
                 if(userAccount == input.account){
-                    string userPath = extractPath() + "\\µn¤J\\" + userAccount + ".txt";
+                    string userPath = extractPath() + "\\Login\\" + userAccount + ".txt";
                     ifstream readUserFile(userPath.c_str(), ios::in);
                     if(readUserFile.is_open()){
                         readUserFile>>user.name;
@@ -240,9 +242,9 @@ bool login(){
         if(loginSuccess)
             break;
         wrongCount++;
-        printf("¤w¿ù»~¿é¤J%d¦¸\n",wrongCount);
+        printf("Have inputed wrong for %d times\n",wrongCount);
         system("pause");
-        //­«¸mÀÉ®×«ü¼Ğ
+        //é‡ç½®æª”æ¡ˆæŒ‡æ¨™
         file.clear();
         file.seekg(0, ios::beg);
     }while(!loginSuccess && wrongCount<3);
@@ -252,58 +254,58 @@ bool login(){
     return loginSuccess;
 }
 
-//µù¥U¤¶­±
+//è¨»å†Šä»‹é¢
 void regisiter(){
-    SetConsoleTitle("µù¥U");
+    SetConsoleTitle("Register");
     string name,account_Input, password_Input, password_Confirm, identity;
     bool success, permission;
-    string filePath = extractPath() + "\\µn¤J\\UserName.txt";
+    string filePath = extractPath() + "\\Login\\UserName.txt";
     ofstream file;
 
     do{
         success = false;
         system("CLS");
         setColor(YELLOW,BLACK);
-        //¿é¤Jµù¥U¸ê°T
-        printf("©m¦W:");
+        //è¼¸å…¥è¨»å†Šè³‡è¨Š
+        printf("Name:");
         cin>>name;
-        printf("¨­¥÷(¾Ç¥Í/¦Ñ®v):");
+        printf("Your Identity(Student/Teacher):");
         cin>>identity;
-        if(identity == "¾Ç¥Í")
+        if(identity == "Student")
             permission = STUDENT;
-        else if(identity == "¦Ñ®v")
+        else if(identity == "Teacher")
             permission = TEACHER;
         else{
-            printf("¨­¥÷¿ù»~\n");
+            printf("Identity Error\n");
             system("pause");
             continue;
         }
-        printf("±b¸¹:");
+        printf("Account:");
         cin>>account_Input;
-        printf("±K½X:");
+        printf("Password:");
         cin>>password_Input;
-        //§PÂ_±b¸¹±K½Xªº®æ¦¡
+        //åˆ¤æ–·å¸³è™Ÿå¯†ç¢¼çš„æ ¼å¼
         if(account_Input.length() < 6 || password_Input.length() < 6){
-            printf("±b¸¹©Î±K½X®æ¦¡¿ù»~\n");
+            printf("Account or Password is wrong format\n");
             system("pause");
             continue;
         }
         system("CLS");
-        //½T»{±K½X
-        printf("½T»{±K½X:");
+        //ç¢ºèªå¯†ç¢¼
+        printf("Confirming Password:");
         cin>>password_Confirm;
         if(password_Input != password_Confirm){
             system("CLS");
-            printf("±K½X¤£¬Û¦P\n");
+            printf("Different Password\n");
             system("pause");
             continue;
         }
         system("CLS");
-        //¼g¤Jµù¥U¦¨¥\ªº¸ê®Æ
+        //å¯«å…¥è¨»å†ŠæˆåŠŸçš„è³‡æ–™
         file.open(filePath.c_str(), ios::app);
         if(file.is_open()){
             file<<account_Input<<endl;
-            string userFilePath = extractPath() + "\\µn¤J\\" +account_Input + ".txt";
+            string userFilePath = extractPath() + "\\Login\\" +account_Input + ".txt";
             ofstream userFile;
             userFile.open(userFilePath.c_str(), ios::out);
             userFile<<name<<endl;
@@ -323,30 +325,30 @@ void regisiter(){
     setColor(WHITE,BLACK);
 }
 
-//¥\¯à¥D¤¶­±
+//åŠŸèƒ½ä¸»ä»‹é¢
 void mainBoard(){
-    SetConsoleTitle("¥D¤¶­±");
+    SetConsoleTitle("MainBoard");
     bool inputCorrect = true;
     int choose;
     setColor(CYAN,BLACK);
     do{
         system("CLS");
-        cout<<"§A¦n, "<<user.name;
+        cout<<"Hello, "<<user.name;
         if(user.permission == TEACHER)
-            printf("¦Ñ®v\n");
+            printf("Teacher\n");
         else
-            printf("¦P¾Ç\n");
+            printf("Studnet\n");
 
-        printf("¥\\¯à¦Cªí\n");
-        printf("1: ¯d¨¥ª©\n");
-        printf("2: ¸ê·½¤À¨É\n");
-        printf("3: ¤À²Õ¥\\¯à\n");
-        printf("4: ¦æ¨Æ¾ä\n");
-        printf("5: ´£¿ô­¶­±\n");
+        printf("Function List\n");
+        printf("1: Message Board\n");
+        printf("2: Sharing Information\n");
+        printf("3: Grouping\n");
+        printf("4: Calendar\n");
+        printf("5: Rewinding\n");
         if(user.permission == TEACHER)
-            printf("6:  ¦Ñ®v±M¥Î¥\\¯à\n");
+            printf("6:  Teacher-specific function\n");
 
-        printf("¿é¤J¥\\¯à¥N¸¹:");
+        printf("Input your choice:");
         cin>>choose;
         inputCorrect = true;
 
@@ -355,7 +357,7 @@ void mainBoard(){
                 commentMainBoard();
                 break;
             case 2:
-                //¶i¤J¸ê·½¤À¨É
+                //é€²å…¥è³‡æºåˆ†äº«
                 system("CLS");
                 setColor(YELLOW,BLACK);
                 if(user.permission == TEACHER)
@@ -369,34 +371,34 @@ void mainBoard(){
                 system("CLS");
                 setColor(RED,BLACK);
                 grouping();
-                //¶i¤J¤À²Õ¥\¯à
+                //é€²å…¥åˆ†çµ„åŠŸèƒ½
                 break;
             case 4:
                 system("CLS");
                 setColor(RED,BLACK);
                 studentCalendar();
-                //¶i¤J¦æ¨Æ¾ä
+                //é€²å…¥è¡Œäº‹æ›†
                 break;
             case 5:
                 system("CLS");
                 setColor(GREEN,BLACK);
                 if(user.permission == TEACHER)
                     //teacherRemind();
-                    printf("±Ğ®vª©´£¿ô¥\\¯à\n");
+                    printf("Teacher-specific function\n");
                 else
                     studentRemind();
-                //¶i¤J´£¿ô­¶­±
+                //é€²å…¥æé†’é é¢
                 break;
             case 6:
                 system("CLS");
                 setColor(DARK_WHITE,BLACK);
                 if(user.permission == TEACHER){
-                    //¶i¤J¦Ñ®v±M¥Î¥\¯à
+                    //é€²å…¥è€å¸«å°ˆç”¨åŠŸèƒ½
                     teacherAnswer();
                     break;
                 }
             default:
-                printf("¿é¤J¿ù»~\n");
+                printf("Input Error\n");
                 system("pause");
                 inputCorrect = false;
                 break;
@@ -406,33 +408,33 @@ void mainBoard(){
     }while(!inputCorrect);
 }
 
-//¯d¨¥ª©¥\¯à¿ï¾Ü¥D¤¶­±
+//ç•™è¨€ç‰ˆåŠŸèƒ½é¸æ“‡ä¸»ä»‹é¢
 void commentMainBoard(){
-    SetConsoleTitle("¯d¨¥ª©¥D¤¶­±");
+    SetConsoleTitle("CommentBoard");
     int choose;
     bool chooseCorrect;
     do{
         system("CLS");
         if(user.sensitiveWordCount>TALK)
-            printf("§A¤w³Q¸T¨¥!!\n");
-        printf("1: ¤W½Òµo°İª©¡]°Î¦W¡^\n");
-        printf("2: µo°İª©\n");
-        printf("¿é¤Jª©­±¥N¸¹:");
+            printf("You are banned!!\n");
+        printf("1: Questioning Board During Classï¼ˆAnonymousï¼‰\n");
+        printf("2: Questioning Board\n");
+        printf("Input your choice:");
         cin>>choose;
         chooseCorrect = true;
 
         switch(choose){
             case 1:
-                commentBooard("¤W½Òµo°İª©");
+                commentBooard("QuestioningBoardDuringClassï¼ˆAnonymousï¼‰");
                 break;
             case 2:
-                commentBooard("µo°İª©");
+                commentBooard("QuestioningBoard");
                 break;
             case KEY_UP:
                 mainBoard();
                 break;
             default:
-                printf("¿é¤J¿ù»~\n");
+                printf("Input Error\n");
                 chooseCorrect = false;
                 system("pause");
                 break;
@@ -443,7 +445,7 @@ void commentMainBoard(){
 }
 
 
-//Åª¨ú²{¦b©Ò¦bªº¦aÂI
+//è®€å–ç¾åœ¨æ‰€åœ¨çš„åœ°é»
 string extractPath(){
     char cwd[PATH_MAX];
    string path;
@@ -456,7 +458,7 @@ string extractPath(){
    }
 }
 
-//¯d¨¥ª©¥\¯à¿ï¾Ü¤¶­±
+//ç•™è¨€ç‰ˆåŠŸèƒ½é¸æ“‡ä»‹é¢
 void commentBooard(string boardName){
     SetConsoleTitle(boardName.c_str());
     int choose;
@@ -465,21 +467,21 @@ void commentBooard(string boardName){
         system("CLS");
         chooseCorrect = true;
         if(user.sensitiveWordCount>TALK)
-            printf("§A¤w³Q¸T¨¥!!\n");
-        printf("1: ÂsÄı©«¤l\n");
-        printf("2: ¶}·s©«¤l\n");
-        printf("¿é¤J¥\\¯à¥N¸¹:");
+            printf("You are banned\n");
+        printf("1: See all the conversation\n");
+        printf("2: Starting new conversation\n");
+        printf("Input your choice:");
         cin>>choose;
         switch(choose){
             case 1:
-                //ÂsÄı©«¤l¦Cªí
+                //ç€è¦½å¸–å­åˆ—è¡¨
                 chooseCorrect = false;
                 browsePostList(boardName);
                 break;
             case 2:
-                //¶}·s©«¤l
+                //é–‹æ–°å¸–å­
                 chooseCorrect = false;
-                if(boardName == "¤W½Òµo°İª©")
+                if(boardName == "QuestioningBoardDuringClassï¼ˆAnonymousï¼‰")
                     createPost(boardName, true);
                 else
                     createPost(boardName, false);
@@ -489,7 +491,7 @@ void commentBooard(string boardName){
                 break;
             default:
                 chooseCorrect = false;
-                printf("¿é¤J¿ù»~\n");
+                printf("Input Error\n");
                 break;
 
         }
@@ -497,43 +499,43 @@ void commentBooard(string boardName){
     }while(!chooseCorrect);
 }
 
-//ÂsÄı©«¤l¦Cªí
+//ç€è¦½å¸–å­åˆ—è¡¨
 void browsePostList(string boardName){
     bool chooseCorrect;
     int cur = 0, postNum;
     string postName[10], junk;
-    string filePath = extractPath() +"\\" + "¯d¨¥ª©" +  "\\" + boardName +"\\postName.txt";
+    string filePath = extractPath() +"\\" + "CommentBoard" +  "\\" + boardName +"\\postName.txt";
     ifstream file(filePath.c_str(), ios::in);
     if(file.is_open()){
         do{
             system("CLS");
             if(user.sensitiveWordCount>TALK)
-                printf("§A¤w³Q¸T¨¥!!\n");
+                printf("You are banned!!\n");
             chooseCorrect = true;
             file.clear();
             file.seekg(0, ios::beg);
-            //ÅıÀÉ®×«ü¼Ğ¦^¨ì·Q­nªº¦ì¸m
+            //è®“æª”æ¡ˆæŒ‡æ¨™å›åˆ°æƒ³è¦çš„ä½ç½®
             for(int i =0; i<cur;i++)
                 file>>junk;
 
-            //¨C¦¸¥uÅã¥Ü10­Ó©«¤l
+            //æ¯æ¬¡åªé¡¯ç¤º10å€‹å¸–å­
             for(int i = 0, postNum = 0; i<10&&!file.eof(); i++, postNum++){
                 file>>postName[postNum];
                 if(file.eof())break;
                 cout<<postNum+1 <<": " << postName[postNum]<<endl;
                 printf("---------------------------------------\n");
             }
-            printf("%-20s%-20s%-20s\n", cur==0? "":"¤W¤@­¶:¤è¦VÁä¥ª", "ªğ¦^:¤è¦VÁä¤W", file.eof()==true? "":"¤U¤@­¶:¤è¦VÁä¥k");
+            printf("%-20s%-20s%-20s\n", cur==0? "":"Previous Page : Left Bottom", "Returning to Main Board : Up Bottom", file.eof()==true? "":"Next Page : Right Bottom");
             char charChoose;
             charChoose = _getch();
             int intChoose = charChoose - '0';
             if(intChoose>=1 && intChoose<=10)
-                //ÂsÄı©«¤l
+                //ç€è¦½å¸–å­
                 browsePost(boardName, postName[--intChoose]);
 
 
             else{
-                //§PÂ_¤è¦VÁä
+                //åˆ¤æ–·æ–¹å‘éµ
                 switch(intChoose = _getch()){
                     case KEY_UP:
                         commentBooard(boardName);
@@ -548,7 +550,7 @@ void browsePostList(string boardName){
                         break;
                     default:
                         chooseCorrect = false;
-                        printf("¿é¤J¿ù»~\n");
+                        printf("Input Error\n");
                         system("pause");
                         break;
                 }
@@ -562,9 +564,9 @@ void browsePostList(string boardName){
     }
 }
 
-//ÂsÄı©«¤l¤º®e
+//ç€è¦½å¸–å­å…§å®¹
 void browsePost(string boardName,string postName){
-    string filePath = extractPath() + "\\" + "¯d¨¥ª©" + "\\" + boardName + "\\" +postName + ".txt";
+    string filePath = extractPath() + "\\" + "CommentBoard" + "\\" + boardName + "\\" +postName + ".txt";
     ifstream file(filePath.c_str(), ios::in);
     string comment, commenter;
     bool chooseCorrect;
@@ -578,33 +580,33 @@ void browsePost(string boardName,string postName){
             file.clear();
             file.seekg(0, ios::beg);
             if(user.sensitiveWordCount>TALK)
-                printf("§A¤w³Q¸T¨¥!!\n");
-            printf("¼ĞÃD:");
+                printf("You are banned!!\n");
+            printf("Title:");
             file>>comment;
             cout<<comment<<endl;
-            printf("§@ªÌ:");
+            printf("Author:");
             file>>commenter;
             cout<<commenter<<endl;
             chooseCorrect = true;
 
             string junk;
-            //ÅıÀÉ®×«ü¼Ğ¦^¨ì·Q­nªº¦ì¸m
+            //è®“æª”æ¡ˆæŒ‡æ¨™å›åˆ°æƒ³è¦çš„ä½ç½®
             for(int i =0; i<cur; i++)
                 file>>junk;
 
             printf("---------------------------------------\n");
-            //¨C¦¸¥uÅã¥Ü10­Ó¯d¨¥
+            //æ¯æ¬¡åªé¡¯ç¤º10å€‹ç•™è¨€
             for(int i = 0, postNum = 0; i<10&&!file.eof(); i++, postNum++)
             {
                 file>>comment;
                 if(file.eof())break;
                 cout<<comment<<endl;
                 file>>commenter;
-                printf("¯d¨¥¤H:");
+                printf("Message From:");
                 cout<<commenter<<endl;
                 printf("---------------------------------------\n");
             }
-            printf("%-20s%-20s%-20s%-20s\n", cur==0? "":"¤W¤@­¶:¤è¦VÁä¥ª", "ªğ¦^:¤è¦VÁä¤W", "¯d¨¥:¤è¦VÁä¤U", file.eof()==true? "":"¤U¤@­¶:¤è¦VÁä¥k");
+            printf("%-20s%-20s%-20s%-20s\n", cur==0? "":"Previous Page : Left Bottom", "Returning to Main Board : Up Bottom", "Leave a comment : Down Bottom", file.eof()==true? "":"Next Page : Right Bottom");
             _getch();
             switch((choose = _getch()))
             {
@@ -615,8 +617,8 @@ void browsePost(string boardName,string postName){
                 chooseCorrect = false;
                 if(user.sensitiveWordCount <= TALK)
                 {
-                    //¯d¨¥
-                    if(boardName == "¤W½Òµo°İª©")
+                    //ç•™è¨€
+                    if(boardName == "QuestioningBoardDuringClassï¼ˆAnonymousï¼‰")
                         commentFun(filePath,true);
                     else
                         commentFun(filePath, false);
@@ -625,7 +627,7 @@ void browsePost(string boardName,string postName){
 
                 else
                 {
-                    printf("§A¤w³Q¸T¨¥!!\n");
+                    printf("You are banned!!\n");
                     system("pause");
                 }
                 break;
@@ -639,7 +641,7 @@ void browsePost(string boardName,string postName){
                 break;
             default:
                 chooseCorrect = false;
-                printf("¿é¤J¿ù»~\n");
+                printf("Input Error\n");
                 system("pause");
                 break;
             }
@@ -648,7 +650,7 @@ void browsePost(string boardName,string postName){
 
     else{
     chooseCorrect = false;
-    printf("©«¤F¤£¦s¦b\n");
+    printf("The comment does not exist\n");
     system("pause");
     browsePostList(boardName);
     }
@@ -657,19 +659,19 @@ void browsePost(string boardName,string postName){
 
 }
 
-//¯d¨¥¥\¯à
+//ç•™è¨€åŠŸèƒ½
 void commentFun(string filePath, bool anonymous){
     ofstream file(filePath.c_str(), ios::app);
     string input;
     if(file.is_open()){
         system("CLS");
-        printf("½Ğ¿é¤J¯d¨¥:\n");
+        printf("Input Comment:\n");
         cin>>input;
-        //¦pªG¨S¦³±Ó·P¦r²´ªº¸Ü§â¯d¨¥¼g¤JÀÉ®×
+        //å¦‚æœæ²’æœ‰æ•æ„Ÿå­—çœ¼çš„è©±æŠŠç•™è¨€å¯«å…¥æª”æ¡ˆ
         if(!haveSensitiveWord(input)){
             file<<input<<endl;
             if(anonymous)
-                file<<"°Î¦W"<<endl;
+                file<<"Anonymous"<<endl;
             else
                 file<<user.name<<endl;
         }
@@ -678,29 +680,29 @@ void commentFun(string filePath, bool anonymous){
     file.close();
 }
 
-//ÀË¬d±Ó·P¦r²´
+//æª¢æŸ¥æ•æ„Ÿå­—çœ¼
 bool haveSensitiveWord(string statment){
     vector<string> sensitiveWord ;
     string tmp = statment, word;
-    string filePath = extractPath() + "\\¯d¨¥ª©\\sensitiveWord.txt";
+    string filePath = extractPath() + "\\CommentBoard\\sensitiveWord.txt";
     ifstream file(filePath.c_str(), ios::in);
     transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
     bool haveWord = false;
     if(file.is_open()){
-        //Åª¨ú©Ò¦³±Ó·P¦r²´
+        //è®€å–æ‰€æœ‰æ•æ„Ÿå­—çœ¼
         while(!file.eof()){
             file>>word;
             sensitiveWord.push_back(word);
         }
     }
     for(int i =0; i < sensitiveWord.size(); i++){
-            //´M§ä±Ó·P¦r²´
+            //å°‹æ‰¾æ•æ„Ÿå­—çœ¼
         if(statment.find(sensitiveWord[i].c_str()) != string::npos || tmp.find(sensitiveWord[i].c_str()) != string::npos){
-            //¦p¯d¨¥¦³±Ó·P¦r²´, §ó·s¨Ï¥ÎªÌ¸ê®Æ
+            //å¦‚ç•™è¨€æœ‰æ•æ„Ÿå­—çœ¼, æ›´æ–°ä½¿ç”¨è€…è³‡æ–™
             user.sensitiveWordCount++;
             system("CLS");
-            printf("¥y¤l§t¦³±Ó·P¦r²´\n");
-            string userFilePath = extractPath() + "\\µn¤J\\" + user.account + ".txt";
+            printf("There are some sensitive word in the sentence\n");
+            string userFilePath = extractPath() + "\\Login\\" + user.account + ".txt";
             ofstream userFile(userFilePath.c_str(), ios::out);
             if(userFile.is_open()){
                 userFile<<user.name<<endl;
@@ -722,25 +724,25 @@ bool haveSensitiveWord(string statment){
 void createPost(string boarName, bool anonymous){
     system("CLS");
     string title, filePath;
-    printf("¿é¤J¼ĞÃD:\n");
+    printf("Enter title:\n");
     cin>>title;
-    filePath = extractPath() + "\\¯d¨¥ª©\\" + boarName + "\\" + title +".txt";
+    filePath = extractPath() + "\\CommentBoard\\" + boarName + "\\" + title +".txt";
     ofstream file(filePath.c_str(), ios::out);
-    string postNamePath = extractPath() + "\\¯d¨¥ª©\\" + boarName + "\\postName.txt";
+    string postNamePath = extractPath() + "\\CommentBoard\\" + boarName + "\\postName.txt";
     ifstream inputPostName(postNamePath.c_str(), ios::in);
     ofstream outputPostName(postNamePath.c_str(), ios::app);
     string file_Input_Post_Name;
     bool postNameRepeat = false;
     if(file.is_open()){
-        //ÀË¬d±Ó·P¦r²´
+        //æª¢æŸ¥æ•æ„Ÿå­—çœ¼
         if(!haveSensitiveWord(title)){
             if(inputPostName.is_open()){
-                //ÀË¬d¼ĞÃD¬O­«½Æ
+                //æª¢æŸ¥æ¨™é¡Œæ˜¯é‡è¤‡
                 while(!inputPostName.eof()){
                     inputPostName>>file_Input_Post_Name;
                     if(file_Input_Post_Name == title){
                         postNameRepeat = true;
-                        printf("©«¤l¼ĞÃD­«½Æ\n");
+                        printf("Repeat Title Name\n");
                         system("pause");
                         break;
                     }
@@ -752,10 +754,10 @@ void createPost(string boarName, bool anonymous){
             if(!postNameRepeat){
                 file<<title<<endl;
                 if(anonymous)
-                    file<<"°Î¦W"<<endl;
+                    file<<"Anonymous"<<endl;
                 else
                     file<<user.name<<endl;
-                //§ó·s¤w³Ğ³yªº©«¤l
+                //æ›´æ–°å·²å‰µé€ çš„å¸–å­
                 if(outputPostName.is_open())
                     outputPostName<<title<<endl;
 

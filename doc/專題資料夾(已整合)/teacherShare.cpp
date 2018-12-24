@@ -10,12 +10,12 @@ void teacherShare(){
     FILE *fp;
     char a[500];
     int i,b;
-    printf("請選擇:1 輸入網址 2 輸入書籍名稱 3 重新寫要分享的網站 4 重新寫要分享的書籍名稱:");
+    printf("Select one:1 Input website 2 Input the name of the book 3 Redo input website 4 Redo Input the name of the book:");
     scanf("%d",&i);
     switch(i){
         case 1:
         scanf("%s",a);
-        printf("請按1 儲存 2 取消:");
+        printf("Press 1 Save 2 cancel:");
         scanf("%d",&b);
         if(b==1){
         fp=fopen("website.txt","a+");
@@ -24,12 +24,12 @@ void teacherShare(){
         break;
         }
         else if(b==2){
-            printf("以取消");
+            printf("Canceled");
             break;
         }
         case 2:
             scanf("%s",a);
-            printf("請按1 儲存 2 取消:");
+            printf("Press 1 Save 2 cancel:");
             scanf("%d",&b);
             if(b==1){
             fp=fopen("book.txt","a+");
@@ -38,12 +38,12 @@ void teacherShare(){
             break;
         }
         else if(b==2){
-            printf("以取消");
+            printf("Canceled");
             break;
         }
         case 3:
             scanf("%s",a);
-            printf("請按1 儲存 2 取消:");
+            printf("Press 1 Save 2 cancel:");
             scanf("%d",&b);
             if(b==1){
             fp=fopen("website.txt","w+");
@@ -52,12 +52,12 @@ void teacherShare(){
             break;
             }
             else if(b==2){
-                printf("以取消");
+                printf("Canceled");
             break;
             }
         case 4:
            scanf("%s",a);
-            printf("請按1 儲存 2 取消:");
+            printf("Press 1 Save 2 cancel:");
             scanf("%d",&b);
             if(b==1){
             fp=fopen("book.txt","w+");
@@ -66,7 +66,7 @@ void teacherShare(){
             break;
             }
             else if(b==2){
-                printf("以取消");
+                printf("Canceled");
             break;
             }
     }

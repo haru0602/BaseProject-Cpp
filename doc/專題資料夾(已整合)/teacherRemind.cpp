@@ -18,7 +18,7 @@ int teacherRemind(){
     {
         file=fopen("rewind.txt","a+");//開檔
         fp=fopen("rewind.txt","a+");//讀檔
-        printf("1.新增提醒文字 2.查看提醒文字 3.跳出\n");
+        printf("1.Add Rewinding 2.See all rewinding 3.Exit\n");
         scanf("%d",&choise);//使用者選擇
         switch(choise)
         {

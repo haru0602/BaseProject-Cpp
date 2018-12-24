@@ -15,7 +15,7 @@ int studentRemind(){
     char data[200],t='a',temp='a';
     while(1)
     {
-        printf("1.查看提醒 2.查看行事曆事件 3.結束\n");
+        printf("1.See all the Rewinding 2.See all event on Calendar 3.Exit\n");
         scanf("%d",&choise);
         switch(choise)
         {

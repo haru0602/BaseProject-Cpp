@@ -12,12 +12,12 @@ void studentShare(){
         FILE *pf;
     char ch;
     int a;
-    printf("請選擇功能: 1 開啟website分享內容 2 開啟book分享內容:");
+    printf("Select One: 1 Open website to share 2 Open book to share:");
     scanf("%d",&a);
     if(a==1){
     if((pf=fopen("website.txt","r"))==NULL)
     {
-        printf("不能開啟此文件!\n");
+        printf("Can not open the file!\n");
         exit(0);
     }
     ch=fgetc(pf);
@@ -31,7 +31,7 @@ void studentShare(){
     else if(a==2){
        if((pf=fopen("book.txt","r"))==NULL)
     {
-        printf("不能開啟此文件!\n");
+        printf("Can not open the file!\n");
         exit(0);
     }
     ch=fgetc(pf);
