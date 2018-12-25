@@ -26,8 +26,7 @@ int studentRemind(){
             {
                 if (t!=EOF)//若t不為EOF則代表文字檔內有東西
                 {
-                    printf("Breaking News!!!\n");
-                    printf("There is a unchecked Remind!!\n\n");
+                    printf("Breaking News!!!\n\n");
                     printf("%c",t);//因為第一個字被拿去判斷了 所以確定不是EOF就要先印出
                     while (!feof(fp))//印出
                     {

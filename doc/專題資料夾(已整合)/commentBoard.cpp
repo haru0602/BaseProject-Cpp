@@ -14,7 +14,7 @@
 
 #include"teacherShare.cpp"
 #include"teacherAnswer.cpp"
-//#include"teacherRemind.cpp"
+#include"teacherRemind.cpp"
 
 #include"studentRemind.cpp"
 #include"studentShare.cpp"
@@ -389,8 +389,8 @@ void mainBoard(){
                 system("CLS");
                 setColor(GREEN,BLACK);
                 if(user.permission == TEACHER)
-                    //teacherRemind();
-                    printf("Teacher-specific function\n");
+                    teacherRemind();
+//                    printf("Teacher-specific function\n");
                 else
                     studentRemind();
                 //進入提醒頁面
@@ -411,7 +411,7 @@ void mainBoard(){
 
 
         }
-    }while(!inputCorrect && !exit);
+    }while(!inputCorrect || !exit);
 }
 
 //留言版功能選擇主介面

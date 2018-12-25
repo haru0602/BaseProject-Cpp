@@ -164,7 +164,7 @@ void setEvent(int year,int month)
 {
     int n;
     char s[100];
-    file=fopen("calendar.txt","a");
+    file=fopen("calendar.txt","w+");
     thisYearEvent[month-1].year = year;//先設定幾年的事件
     while (1)
     {
@@ -197,6 +197,7 @@ void setEvent(int year,int month)
     strcat(data,da);
     strcat(data,space);
     strcat(data,info);
+    strcat(data,change);
     strcat(data,change);
     fputs(data,file);//最後丟進file裡面
     fclose(file);

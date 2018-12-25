@@ -36,7 +36,7 @@ int teacherRemind(){
                 temp[lengh]='\n';//在輸入字串後加上換行
                 temp[lengh+1]='\0';
 //                fputs(temp,file);
-                if(temp!=EOF)//成功寫入陣列的話
+                if(temp!=NULL)//成功寫入陣列的話
                 {
                     fputs(temp,file);//寫檔
 
