@@ -348,7 +348,7 @@ void mainBoard(){
         printf("4: Calendar\n");
         printf("5: Rewinding\n");
         if(user.permission == TEACHER)
-            printf("6:  Teacher-specific function\n");
+            printf("6: Teacher-specific function\n");
 
         printf("Input your choice:");
         cin>>choose;
