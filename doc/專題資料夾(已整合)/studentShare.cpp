@@ -32,7 +32,7 @@ void studentShare(){
        if((pf=fopen("book.txt","r"))==NULL)
     {
         printf("Can not open the file!\n");
-        exit(0);
+        return -1;
     }
     ch=fgetc(pf);
     while(ch!=EOF){
