@@ -28,6 +28,9 @@ int teacherShare(){
             printf("Canceled");
             break;
         }
+        else{
+        	continue;
+		}
         case 2:
             scanf("%s",a);
             printf("Press 1.Save 2.cancel:");
@@ -42,6 +45,9 @@ int teacherShare(){
             printf("Canceled");
             break;
         }
+        else{
+        	continue;
+		}
         case 3:
             scanf("%s",a);
             printf("Press 1.Save 2.cancel:");
@@ -56,6 +62,9 @@ int teacherShare(){
                 printf("Canceled");
             break;
             }
+            else{
+        	continue;
+		}
         case 4:
            scanf("%s",a);
             printf("Press 1 Save 2 cancel:");
@@ -70,6 +79,9 @@ int teacherShare(){
                 printf("Canceled");
             break;
             }
+            else{
+        	continue;
+		}
         case 5:
             return -1;
             break;
