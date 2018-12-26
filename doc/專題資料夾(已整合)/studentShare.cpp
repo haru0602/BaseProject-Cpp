@@ -8,39 +8,48 @@
     return 0;
 }*/
 
-void studentShare(){
-        FILE *pf;
+void studentShare()
+{
+    FILE *pf;
     char ch;
     int a;
-    printf("Select One: 1 Open website to share 2 Open book to share:");
-    scanf("%d",&a);
-    if(a==1){
-    if((pf=fopen("website.txt","r"))==NULL)
+
+    while(1)
     {
-        printf("Can not open the file!\n");
-        exit(0);
-    }
-    ch=fgetc(pf);
-    while(ch!=EOF){
-        putchar(ch);
-        ch=fgetc(pf);
-    }
-    printf("\n");
-    fclose(pf);
-    }
-    else if(a==2){
-       if((pf=fopen("book.txt","r"))==NULL)
-    {
-        printf("Can not open the file!\n");
-        return -1;
-    }
-    ch=fgetc(pf);
-    while(ch!=EOF){
-        putchar(ch);
-        ch=fgetc(pf);
-    }
-    printf("\n");
-    fclose(pf);
+        printf("Select One: 1 Open website to share 2 Open book to share 3 Exit:");
+        scanf("%d",&a);
+        if(a==1)
+        {
+            if((pf=fopen("website.txt","r"))==NULL)
+            {
+                printf("Can not open the file!\n");
+            }
+            ch=fgetc(pf);
+            while(ch!=EOF)
+            {
+                putchar(ch);
+                ch=fgetc(pf);
+            }
+            printf("\n");
+            fclose(pf);
+        }
+        else if(a==2)
+        {
+            if((pf=fopen("book.txt","r"))==NULL)
+            {
+                printf("Can not open the file!\n");
+            }
+            ch=fgetc(pf);
+            while(ch!=EOF)
+            {
+                putchar(ch);
+                ch=fgetc(pf);
+            }
+            printf("\n");
+            fclose(pf);
+        }
+        else
+            exit(0);
     }
 }
 /*=======
