@@ -537,7 +537,7 @@ void browsePostList(string boardName){
                 cout<<postNum+1 <<": " << postName[postNum]<<endl;
                 printf("---------------------------------------\n");
             }
-            printf("%-20s%-20s%-20s\n", cur==0? "":"Previous Page : Left Bottom ", " --Returning to Main Board : Up Bottom ", file.eof()==true? "":" --Next Page : Right Bottom ");
+            printf("%-20s%-20s%-20s\n", cur==0? "":"Previous Page : Left Bottom", "Returning to Main Board : Up Bottom", file.eof()==true? "":"Next Page : Right Bottom");
             char charChoose;
             charChoose = _getch();
             int intChoose = charChoose - '0';
