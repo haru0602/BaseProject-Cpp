@@ -2,18 +2,17 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-
+int studentShare();
 /*int main(){
     studentShare();
     return 0;
 }*/
 
-void studentShare()
+int studentShare()
 {
     FILE *pf;
     char ch;
     int a;
-
     while(1)
     {
         printf("Select One: 1 Open website to share 2 Open book to share 3 Exit:");
@@ -49,7 +48,7 @@ void studentShare()
             fclose(pf);
         }
         else
-            exit(0);
+            return -1;
     }
 }
 /*=======

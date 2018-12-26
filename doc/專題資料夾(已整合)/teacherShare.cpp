@@ -2,20 +2,21 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void teacherShare();
+int teacherShare();
 /*int main(){
     teacherShare();
 }*/
-void teacherShare(){
+int teacherShare(){
     FILE *fp;
     char a[500];
     int i,b;
-    printf("Select one:1 Input website 2 Input the name of the book 3 Redo input website 4 Redo Input the name of the book:");
+    while(1){
+    printf("Select one:1.Input website 2.Input the name of the book 3.Redo input website 4.Redo Input the name of the book 5.Exit:");
     scanf("%d",&i);
     switch(i){
         case 1:
         scanf("%s",a);
-        printf("Press 1 Save 2 cancel:");
+        printf("Press 1.Save 2.cancel:");
         scanf("%d",&b);
         if(b==1){
         fp=fopen("website.txt","a+");
@@ -29,7 +30,7 @@ void teacherShare(){
         }
         case 2:
             scanf("%s",a);
-            printf("Press 1 Save 2 cancel:");
+            printf("Press 1.Save 2.cancel:");
             scanf("%d",&b);
             if(b==1){
             fp=fopen("book.txt","a+");
@@ -43,7 +44,7 @@ void teacherShare(){
         }
         case 3:
             scanf("%s",a);
-            printf("Press 1 Save 2 cancel:");
+            printf("Press 1.Save 2.cancel:");
             scanf("%d",&b);
             if(b==1){
             fp=fopen("website.txt","w+");
@@ -69,6 +70,12 @@ void teacherShare(){
                 printf("Canceled");
             break;
             }
+        case 5:
+            return -1;
+            break;
+        default:
+            printf("Please enter again!!\n");
+    }
     }
 }
 
