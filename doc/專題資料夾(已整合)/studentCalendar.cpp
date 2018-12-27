@@ -149,7 +149,7 @@ void printcalendar(int year, int month)
             {
                 if (thisYearEvent[month-1].thisdayEvent[j].flag == 1)//有事件就顯示
                 {
-                    printf("Day: ·%d\n%s\n",j,thisYearEvent[month-1].thisdayEvent[j].c);
+                    printf("Day: %d\n%s\n",j,thisYearEvent[month-1].thisdayEvent[j].c);
                 }
             }
             break;
