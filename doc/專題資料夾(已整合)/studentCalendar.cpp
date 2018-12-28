@@ -69,7 +69,7 @@ int studentCalendar(){
                 if(year>9999 || year<1000 || month>12 || month<0)
                 {
                     printf("validation error, \nredesignate year and month\n");
-                    return 0;
+                    continue;
                 }
                 setEvent(year,month);
                 printcalendar(year, month);

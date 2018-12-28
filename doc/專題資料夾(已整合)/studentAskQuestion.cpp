@@ -12,21 +12,31 @@ void studentAskQuestion();
 
 
 
-/*int main(){
+int main(){
 	studentAskQuestion();
-}*/
+}
 void studentAskQuestion(){
+
     char *question;
+
 	question=(char*)malloc( 1000 * sizeof(char) );
+
 	char *answer;
-	answer=(char*)malloc(1000 * sizeof(char) );
+
+	answer=(char*)malloc(1000 * sizeof(char));
+
 
 	int i=0,k=0,l=0;
 
 	FILE *fp2=fopen("test.txt","r");
-	while(!feof(fp2)){
-		fscanf(fp2,"%s",answer);
-	}
+    if(fp2 != NULL){
+        while(!feof(fp2)){
+
+            fscanf(fp2,"%s",answer);
+        }
+    }
+    else
+        printf("file not found\n");
 	printf("%s\n",answer);
 
 	fclose(fp2);

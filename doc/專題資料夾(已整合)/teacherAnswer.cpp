@@ -12,9 +12,9 @@ void teacherAnswer();
 
 
 
-/*int main(){
+int main(){
 	teacherAnswer();
-}*/
+}
 
 void teacherAnswer(){
 char *question;
@@ -29,8 +29,9 @@ char *question;
 
 	}
 	printf("%s\n",question);
-	fclose(fp);
 
+	fclose(fp);
+    system("pause");
 
 	FILE *fp2=fopen("test.txt","a");
 

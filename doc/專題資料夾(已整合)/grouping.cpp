@@ -80,9 +80,10 @@ void grouping(){
             printf("Example:D1234567 PeterChan  (Student need not space)  \n");
             scanf("%s %s",&current->std_id,&current->name);
             random=(rand()%totalgroup)+1;
+            printf("*********************************************************************\n");
             printf("This student will spread in Group%d.\n",random);
             current->group=random;
-            printf("*********************************************************************\n:");
+            printf("*********************************************************************\n");
             if(flag==0)
             {
                 head=current;
@@ -108,13 +109,15 @@ void grouping(){
             }
             else
             {
+            printf("*********************************************************************\n");
             while(current!=NULL)
             {
                 printf("%s %s %d\n",current->std_id,current->name,current->group);
-                printf("*********************************************************************\n:");
+
                 current=current->next;
 
             }
+            printf("*********************************************************************\n:");
             break;
             }
         case 4:

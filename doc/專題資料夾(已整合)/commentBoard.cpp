@@ -399,9 +399,12 @@ void mainBoard(){
                 system("CLS");
                 setColor(DARK_WHITE,BLACK);
                 if(user.permission == TEACHER){
-                    //進入老師專用功能
+                        printf("in\n");
+                system("pause");
                     teacherAnswer();
-                    break;
+
+                }else{
+                studentAskQuestion();
                 }
             default:
                 printf("Input Error\n");
@@ -534,7 +537,7 @@ void browsePostList(string boardName){
             for(int i = 0, postNum = 0; i<10&&!file.eof(); i++, postNum++){
                 file>>postName[postNum];
                 if(file.eof())break;
-                cout<<postNum+1 <<": " << postName[postNum]<<endl;
+                cout<<postNum <<": " << postName[postNum]<<endl;
                 printf("---------------------------------------\n");
             }
             printf("%-20s%-20s%-20s\n", cur==0? "":"Previous Page : Left Bottom", "Returning to Main Board : Up Bottom", file.eof()==true? "":"Next Page : Right Bottom");
@@ -543,7 +546,7 @@ void browsePostList(string boardName){
             int intChoose = charChoose - '0';
             if(intChoose>=1 && intChoose<=10)
                 //瀏覽帖子
-                browsePost(boardName, postName[--intChoose]);
+                browsePost(boardName, postName[intChoose]);
 
 
             else{
